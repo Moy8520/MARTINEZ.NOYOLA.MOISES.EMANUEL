@@ -1,0 +1,388 @@
+***********************************************************************
+*
+*	CODE GENERATION LISTING FOR: ACT 1
+*	COMPILER VERSION: 5.10.0.9
+*
+***********************************************************************
+
+***********************************************************************
+UNUSED FUNCTIONS:
+
+	DEAD_BAND
+	SGN
+***********************************************************************
+
+***********************************************************************
+UNUSED FUNCTION BLOCKS:
+
+	CTUD_UDINT
+	CTUD_DINT
+	CTUD
+	CTU_UDINT
+	CTU
+	CTU_DINT
+	CTD_UDINT
+	CTD_DINT
+	CTD
+	R_TRIG
+	F_TRIG
+	SR
+	RS
+	TP
+	TON
+	TOF
+	FT_DERIV
+	FT_INT
+	FT_PID
+***********************************************************************
+
+**************************************************
+	List program: MAIN
+**************************************************
+
+PROGRAM MAIN
+
+END_PROGRAM
+
+053A00A0  55                            push ebp
+053A00A1  8B EC                         mov ebp, esp
+053A00A3  60                            pushad
+
+#0		{SRC:MAIN}
+#1		(*$WAITSWITCH$*)
+#2		
+#3			(* CNT := CNT + 1; *)
+#4			LD		CNT	{LNXT:2|2|-1}
+(*) UNDEF
+053A00A4  0F BF 05 CC CC CC CC          movsx eax, word ptr [CCCCCCCCH] ; $$DATA$$+12
+
+#5			ADD		1	{LNXT:2|2|-1}
+(*) INT
+053A00AB  05 01 00 00 00                add eax, 1
+
+#6			ST		CNT	{LNXT:2|2|-1}
+(*) INT
+053A00B0  66 89 05 CC CC CC CC          mov [CCCCCCCCH], ax ; $$DATA$$+12
+
+END_PROGRAM
+**************************************************
+	List program: ACT1
+**************************************************
+
+PROGRAM ACT1
+
+        VAR
+P AT %IX0.7 : BOOL;
+Q AT %IX0.8 : BOOL;
+A AT %IX0.3 : BOOL;
+B AT %IX0.4 : BOOL;
+C AT %IX0.9 : BOOL;
+D AT %QX0.2 : BOOL;
+E AT %QX0.6 : BOOL;
+	END_VAR
+
+END_PROGRAM
+
+#0			{SRC:ACT1}
+#1		 
+#2		  
+#3			(* Network 1 *)
+#4			LDN		P {R:1$13}
+(*) UNDEF
+053A00B7  33 C0                         xor eax, eax
+053A00B9  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+7
+053A00BF  84 C0                         test al, al
+053A00C1  0F 94 C0                      sete al
+
+#5			ANDN		E {R:1$15}
+(*) BOOL
+053A00C4  33 C9                         xor ecx, ecx
+053A00C6  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %Q0+6
+053A00CC  84 C9                         test cl, cl
+053A00CE  0F 94 C1                      sete cl
+053A00D1  23 C1                         and eax, ecx
+
+#6			ANDN		Q {R:1$26}
+(*) BOOL
+053A00D3  33 C9                         xor ecx, ecx
+053A00D5  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+8
+053A00DB  84 C9                         test cl, cl
+053A00DD  0F 94 C1                      sete cl
+053A00E0  23 C1                         and eax, ecx
+
+#7			AND		C {R:1$25}
+(*) BOOL
+053A00E2  33 C9                         xor ecx, ecx
+053A00E4  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+9
+053A00EA  23 C1                         and eax, ecx
+
+#8			OR(		Q {R:1$17}
+(*) BOOL
+053A00EC  50                            push eax
+053A00ED  33 C0                         xor eax, eax
+053A00EF  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+8
+
+#9			NOT
+#10			AND		B {R:1$23}
+(*) BOOL
+053A00F5  84 C0                         test al, al
+053A00F7  0F 94 C0                      sete al
+
+(*) BOOL
+053A00FA  33 C9                         xor ecx, ecx
+053A00FC  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+4
+053A0102  23 C1                         and eax, ecx
+
+#11			ANDN		E {R:1$27}
+(*) BOOL
+053A0104  33 C9                         xor ecx, ecx
+053A0106  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %Q0+6
+053A010C  84 C9                         test cl, cl
+053A010E  0F 94 C1                      sete cl
+053A0111  23 C1                         and eax, ecx
+
+#12			)
+#13			OR		D {R:1$21}
+(*) BOOL
+053A0113  8B C8                         mov ecx, eax
+053A0115  58                            pop eax
+053A0116  0B C1                         or eax, ecx
+
+(*) BOOL
+053A0118  33 C9                         xor ecx, ecx
+053A011A  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %Q0+2
+053A0120  0B C1                         or eax, ecx
+
+#14			ANDN		A {R:1$0}
+(*) BOOL
+053A0122  33 C9                         xor ecx, ecx
+053A0124  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+3
+053A012A  84 C9                         test cl, cl
+053A012C  0F 94 C1                      sete cl
+053A012F  23 C1                         and eax, ecx
+
+#15			ST		D {R:1$1}
+(*) BOOL
+053A0131  84 C0                         test al, al
+053A0133  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; %Q0+2
+
+#16		 
+#17			(* Network 2 *)
+#18			LD		A {R:2$0}
+(*) UNDEF
+053A013A  33 C0                         xor eax, eax
+053A013C  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+3
+
+#19			OR		E {R:2$8}
+(*) BOOL
+053A0142  33 C9                         xor ecx, ecx
+053A0144  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %Q0+6
+053A014A  0B C1                         or eax, ecx
+
+#20			ANDN		C {R:2$6}
+(*) BOOL
+053A014C  33 C9                         xor ecx, ecx
+053A014E  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+9
+053A0154  84 C9                         test cl, cl
+053A0156  0F 94 C1                      sete cl
+053A0159  23 C1                         and eax, ecx
+
+#21			AND(		B {R:2$21}
+(*) BOOL
+053A015B  50                            push eax
+053A015C  33 C0                         xor eax, eax
+053A015E  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+4
+
+#22			NOT
+#23			AND		P {R:2$24}
+(*) BOOL
+053A0164  84 C0                         test al, al
+053A0166  0F 94 C0                      sete al
+
+(*) BOOL
+053A0169  33 C9                         xor ecx, ecx
+053A016B  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+7
+053A0171  23 C1                         and eax, ecx
+
+#24			OR(		P {R:2$22}
+(*) BOOL
+053A0173  50                            push eax
+053A0174  33 C0                         xor eax, eax
+053A0176  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+7
+
+#25			AND		B {R:2$26}
+(*) BOOL
+053A017C  33 C9                         xor ecx, ecx
+053A017E  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+4
+053A0184  23 C1                         and eax, ecx
+
+#26			)
+#27			)
+(*) BOOL
+053A0186  8B C8                         mov ecx, eax
+053A0188  58                            pop eax
+053A0189  0B C1                         or eax, ecx
+
+#28			OR(		Q {R:2$4}
+(*) BOOL
+053A018B  8B C8                         mov ecx, eax
+053A018D  58                            pop eax
+053A018E  23 C1                         and eax, ecx
+
+(*) BOOL
+053A0190  50                            push eax
+053A0191  33 C0                         xor eax, eax
+053A0193  8A 05 CC CC CC CC             mov al, [CCCCCCCCH] ; %I0+8
+
+#29			AND		A {R:2$20}
+(*) BOOL
+053A0199  33 C9                         xor ecx, ecx
+053A019B  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+3
+053A01A1  23 C1                         and eax, ecx
+
+#30			OR		E {R:2$16}
+(*) BOOL
+053A01A3  33 C9                         xor ecx, ecx
+053A01A5  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %Q0+6
+053A01AB  0B C1                         or eax, ecx
+
+#31			ANDN		B {R:2$14}
+(*) BOOL
+053A01AD  33 C9                         xor ecx, ecx
+053A01AF  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+4
+053A01B5  84 C9                         test cl, cl
+053A01B7  0F 94 C1                      sete cl
+053A01BA  23 C1                         and eax, ecx
+
+#32			ANDN		C {R:2$28}
+(*) BOOL
+053A01BC  33 C9                         xor ecx, ecx
+053A01BE  8A 0D CC CC CC CC             mov cl, [CCCCCCCCH] ; %I0+9
+053A01C4  84 C9                         test cl, cl
+053A01C6  0F 94 C1                      sete cl
+053A01C9  23 C1                         and eax, ecx
+
+#33			)
+#34			ST		E {R:2$1}
+(*) BOOL
+053A01CB  8B C8                         mov ecx, eax
+053A01CD  58                            pop eax
+053A01CE  0B C1                         or eax, ecx
+
+(*) BOOL
+053A01D0  84 C0                         test al, al
+053A01D2  0F 95 05 CC CC CC CC          setne [CCCCCCCCH] ; %Q0+6
+
+053A01D9  61                            popad
+053A01DA  5D                            pop ebp
+
+053A01DB  C3                            ret
+
+END_PROGRAM
+
+
+**************************************************
+	Target variable image generation
+**************************************************
+
+
+*** INPUT:
+053A01DC  C3                            ret
+
+
+*** OUTPUT:
+053A01DD  C3                            ret
+
+
+
+**************************************************
+	Task FAST init code
+**************************************************
+
+053A01DE  55                            push ebp
+053A01DF  8B EC                         mov ebp, esp
+
+053A01E1  8B E5                         mov esp, ebp
+053A01E3  5D                            pop ebp
+
+053A01E4  C3                            ret
+
+
+
+**************************************************
+	Global init code
+**************************************************
+
+053A01F0  55                            push ebp
+053A01F1  8B EC                         mov ebp, esp
+
+Var init: $$POUCBARRAY$$FAST = 0
+053A01F3  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+28
+053A01F8  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+16
+053A01FE  B9 CC CC CC CC                mov ecx, CCCCCCCCH ; $$DATA$$+34
+053A0203  89 0D CC CC CC CC             mov [CCCCCCCCH], ecx ; $$DATA$$+16
+
+053A0209  8B E5                         mov esp, ebp
+053A020B  5D                            pop ebp
+
+053A020C  C3                            ret
+
+
+
+**************************************************
+	Global RETAIN init code
+**************************************************
+
+053A020D  55                            push ebp
+053A020E  8B EC                         mov ebp, esp
+
+053A0210  8B E5                         mov esp, ebp
+053A0212  5D                            pop ebp
+
+053A0213  C3                            ret
+
+
+
+**************************************************
+	Task $$VirtualTables init code
+**************************************************
+
+053A0214  55                            push ebp
+053A0215  8B EC                         mov ebp, esp
+
+053A0217  8B E5                         mov esp, ebp
+053A0219  5D                            pop ebp
+
+053A021A  C3                            ret
+
+
+
+********************************************
+MEMORY MAP
+********************************************
+
+Code area type:			main code
+Start code area:		 53A0000h
+End code area:			 53A0220h
+Code size:			     220h
+
+Start local data area:		 5350000h
+End local data area:		 5350028h
+Local data size:		      28h
+
+Start retentive data area:	 5390000h
+End retentive data area:	 5390000h
+Retentive data size:		       0h
+
+Start bit data area:		       0h
+End bit data area:		       0h
+Bit data size:			       0h
+
+
+
+********************************************
+CODE ID:                                D8ECC527
+DEBUG MEMO ID:                          00004B54
+FULL MEMO ID:                           00007012
+RELOCATION ADDR:                        053A0000
+********************************************
